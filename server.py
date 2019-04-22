@@ -171,6 +171,14 @@ def add():
   return redirect('/')
 
 
+@app.route('/response', methods=['POST'])
+def response_create():
+  tweet_id = request.form['tweet_id']
+  is_fake = request.form['is_fake'] # 0 or 1
+  cmd = 'INSERT INTO response(tweet_id, is_fake) VALUES (:tweet_id,:is_fake)'
+  g.conn.execute(text(cmd), tweet_id=tweet_id, is_fake=is_fake)
+
+
 @app.route('/login')
 def login():
     abort(401)
