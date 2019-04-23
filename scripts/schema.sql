@@ -11,7 +11,7 @@ CREATE TABLE Tweets
   retweet           BOOLEAN NOT NULL,
   retweet_source_id TEXT,
   retweet_count     INTEGER,
-)
+);
 
 -- Response table
 DROP TABLE IF EXISTS Response;
