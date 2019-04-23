@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Tweets;
 CREATE TABLE Tweets
 (
   tweet_id          TEXT PRIMARY KEY,
+  tweet_hashtag     TEXT NOT NULL,
   tweet_text        TEXT NOT NULL,
   retweet           BOOLEAN NOT NULL,
   retweet_source_id TEXT,

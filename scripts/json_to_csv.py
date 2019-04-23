@@ -12,7 +12,7 @@ curr_file = os.path.join(rumours, '552943855021330432.json')
 # print(os.listdir(non_rumours))
 
 # Mimic database table Tweets
-labels = ['tweet_id', 'tweet_text', 'retweet', 'retweet_source_id', 'retweet_count', 'is_fake']
+labels = ['tweet_id', 'tweet_hashtag', 'tweet_text', 'retweet', 'retweet_source_id', 'retweet_count', 'is_fake']
 
 data_list_fake = []
 data_list_non_fake = []
@@ -22,6 +22,7 @@ for file in os.listdir(rumours):
     with open(curr_file) as json_file:
         d = json.load(json_file)
         id = d['id_str']
+        hashtag = 'charliehebdo'
         text = d['text']
         if d['retweeted'] == False:
             retweeted = 'false'
@@ -30,13 +31,14 @@ for file in os.listdir(rumours):
         in_reply_to = d['in_reply_to_status_id_str']
         retweet_count = int(d['retweet_count'])
         is_fake = 'true'
-        data_list_fake.append([id, text, retweeted, in_reply_to, retweet_count, is_fake])
+        data_list_fake.append([id, hashtag, text, retweeted, in_reply_to, retweet_count, is_fake])
 
 for file in os.listdir(non_rumours):
     curr_file = os.path.join(non_rumours, file)
     with open(curr_file) as json_file:
         d = json.load(json_file)
         id = d['id_str']
+        hashtag = 'charliehebdo'
         text = d['text']
         if d['retweeted'] == False:
             retweeted = 'false'
@@ -45,7 +47,7 @@ for file in os.listdir(non_rumours):
         in_reply_to = d['in_reply_to_status_id_str']
         retweet_count = int(d['retweet_count'])
         is_fake = 'false'
-        data_list_non_fake.append([id, text, retweeted, in_reply_to, retweet_count, is_fake])
+        data_list_non_fake.append([id, hashtag, text, retweeted, in_reply_to, retweet_count, is_fake])
 
 all_tweets = data_list_fake + data_list_non_fake
 
