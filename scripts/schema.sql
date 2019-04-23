@@ -20,12 +20,12 @@ DROP TABLE IF EXISTS Response;
 CREATE TABLE Response
 (
   response_id  SERIAL PRIMARY KEY,
-  tweet_id     INTEGER NOT NULL,
+  tweet_id     TEXT NOT NULL,
   is_fake      BOOLEAN NOT NULL,
   CONSTRAINT response_tweet_id_fk
   FOREIGN KEY (tweet_id)
   REFERENCES Tweets (tweet_id) MATCH SIMPLE
-  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 -- User table
