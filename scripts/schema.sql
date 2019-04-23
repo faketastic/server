@@ -11,6 +11,7 @@ CREATE TABLE Tweets
   retweet           BOOLEAN NOT NULL,
   retweet_source_id TEXT,
   retweet_count     INTEGER,
+  is_fake           BOOLEAN
 );
 
 -- Response table
