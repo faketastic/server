@@ -49,3 +49,6 @@ When you've made your guesses, click submit to have your responses scored. Green
 
 ### Members
 Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirun
+
+### Resource
+[Jira](https://toydemoproject.atlassian.net/jira/software/projects/FAK/boards/10)
