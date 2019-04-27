@@ -15,12 +15,17 @@ import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
+
 import credentials
 import json
+
+import json as json
+
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 
 
 
@@ -203,11 +208,16 @@ def login():
     this_is_never_executed()
 
 
-@app.route('/tweets')
+@app.route('/tweets',methods=['GET','POST'])
 def tweets():
-  cmd = "SELECT tweet_id, is_fake, tweet_text FROM Tweets LIMIT 10";
-  cursor = g.conn.execute(cmd)
-  data = [dict(tweet_id=result[0], is_fake=result[1], tweet_text=result[2]) for result in cursor]
+  topic = request.form['topic_id']
+  cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic LIMIT 10) "
+  # cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
+  # cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
+  # cmd  = cmd1+cmd2
+  # print(cmd)
+  alltweets = g.conn.execute(text(cmd),topic=str(topic))
+  data = [dict(tweet_id=result[0], is_fake=result[2], tweet_text=result[1]) for result in alltweets]
   data_string = json.dumps(data)
   context = dict(data=data, data_string=data_string)
   return render_template('tweets.html', **context)
