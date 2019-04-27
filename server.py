@@ -157,7 +157,7 @@ def index():
 # notice that the functio name is another() rather than index()
 # the functions for each app.route needs to have different names
 #
-@app.route('/landing')
+@app.route('/')
 def landing():
     # Get list of all hashtags
     # from DB
