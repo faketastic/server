@@ -41,11 +41,15 @@ Now you can see the text from ten tweets from the hashtag #charliehebdo.
 
 Which do you think are fake? Go ahead and mark those that don't seem real.  
 
-![Response selection](https://github.com/faketastic/server/blob/master/assets/response_selection.png)
+![Response selection](https://github.com/faketastic/server/blob/master/assets/response_selection.png "Response selection")
 
 When you've made your guesses, click submit to have your responses scored. Green means you were right, if you're seeing red you might want to recalibrate your fake news detector.  
 
-![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png)
+![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png "Response scoring") 
+
+Responses are stored in our database, for user analytics and for retraining a yet to be implemented fake tweet detection machine learning model.  
+
+![Response database](https://github.com/faketastic/server/blob/master/assets/response_database.png "Response database") 
 
 ### Members
 Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirun
