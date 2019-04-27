@@ -28,6 +28,14 @@ CREATE TABLE Response
   ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+-- Topics table
+DROP TABLE IF EXISTS Hashtags;
+CREATE TABLE Hashtags
+(
+  hashtag_id    SERIAL PRIMARY KEY,
+  tweet_hashtag TEXT NOT NULL
+);
+
 -- User table
 -- DROP TABLE IF EXISTS Users;
 -- CREATE TABLE Users
