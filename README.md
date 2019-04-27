@@ -54,5 +54,5 @@ Responses are stored in our database, for user analytics and for retraining a ye
 ### Members
 Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirun
 
-### Resource
+### Resources
 [Jira](https://toydemoproject.atlassian.net/jira/software/projects/FAK/boards/10)
