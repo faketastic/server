@@ -157,9 +157,21 @@ def index():
 # notice that the functio name is another() rather than index()
 # the functions for each app.route needs to have different names
 #
-@app.route('/another')
-def another():
-  return render_template("anotherfile.html")
+@app.route('/landing')
+def landing():
+    # Get list of all hashtags
+    # from DB
+    cmd = '''
+            SELECT  *
+            FROM    hashtags
+          '''
+    hashtag_cursor = g.conn.execute(text(cmd))
+
+    hashtags = []
+    for result in hashtag_cursor:
+        hashtags.append(results[1])
+
+    return render_template('landing.html', hahstags=hashtags)
 
 
 # Example of adding new data to the database
