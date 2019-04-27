@@ -15,6 +15,7 @@ import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
+import credentials
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -34,8 +35,8 @@ app = Flask(__name__, template_folder=tmpl_dir)
 # Use the DB credentials you received by e-mail
 # DB_USER = "YOUR_DB_"
 # DB_PASSWORD = "YOUR_DB_PASSWORD_HERE"
-DB_USER = "FakeTastic"
-DB_PASSWORD = "goW$!JweCnZ7aa"
+DB_USER = credentials.username()
+DB_PASSWORD = credentials.password()
 
 # DB_SERVER = "w4111.cisxo09blonu.us-east-1.rds.amazonaws.com"
 DB_SERVER = "mydbinstance.cmgiyjltohsu.us-east-1.rds.amazonaws.com"
@@ -183,6 +184,11 @@ def response_create():
 def login():
     abort(401)
     this_is_never_executed()
+
+
+@app.route('/tweets')
+def tweets():
+  return render_template('tweets.html')
 
 
 if __name__ == "__main__":

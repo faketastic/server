@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/tweets.css" type="text/css">
+
+{% block body %}
+
+<body class="container">
+    <br>
+
+    <h1>{{location_name}}</h1>
+    <h2>{{menu_name}}</h2>
+
+    <form method="POST" id="response-form">
+	<div class="response-form">
+	    <div class="form-group row">
+		<div class="col-sm">
+		    <input type="submit" value="Submit" class="btn btn-primary">
+		</div>
+	    </div>
+	</div>
+    </form>
+    <table class="table table-striped">
+	<thead class="thead-light">
+	    <tr>
+		<th scope="col">Fake?</th>
+		<th scope="col">Tweet</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for n in data %}
+	    <tr>
+		<th scope="row">
+		    <input type="checkbox" id="qty" name="{{n.tweet_id}}" form="response-form"/>
+		</th>
+		<td class="menu_section">{{n.tweet_text}}</td>
+
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+
+</body>
+{% endblock %}
