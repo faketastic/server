@@ -167,12 +167,10 @@ def landing():
             FROM    hashtags
           '''
     hashtag_cursor = g.conn.execute(text(cmd))
-
     hashtags = []
     for result in hashtag_cursor:
         hashtags.append(result[1])
-
-    return render_template('home.html', hahstags=hashtags)
+    return render_template('home.html', hashtags=hashtags)
 
 
 # Example of adding new data to the database

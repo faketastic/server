@@ -10,12 +10,12 @@
        </div>
        <div class="login-form">
               <select class="ui massive dropdown teal button" multiple="" name="sp_id" id="search-select">
-                {% for hash in hashtags %}
-                  <option value={{ hash }}>{{ hash }}</option>
+                {% for hashtag in hashtags %}
+                  <option value={{ hashtag }}>{{ hashtag }}</option>
                 {% endfor %}
               </select>
               <label class="login-field-icon fui-lock" for="signin-city"></label>
-              <input type="button" value="View" onclick="window.location.href='{{ url_for( 'tweets') }}';">
+              <input type="button" value="View" class="btn btn-primary btn-large btn-block" onclick="window.location.href='{{ url_for( 'tweets') }}';">
        </div>
 </div>
 </div>
