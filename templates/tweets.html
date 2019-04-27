@@ -11,15 +11,7 @@
     <h1>{{location_name}}</h1>
     <h2>{{menu_name}}</h2>
 
-    <form method="POST" id="response-form">
-	<div class="response-form">
-	    <div class="form-group row">
-		<div class="col-sm">
-		    <input type="submit" value="Submit" class="btn btn-primary">
-		</div>
-	    </div>
-	</div>
-    </form>
+
     <table class="table table-striped">
 	<thead class="thead-light">
 	    <tr>
@@ -29,16 +21,60 @@
 	</thead>
 	<tbody>
 	    {% for n in data %}
-	    <tr>
-		<td style="display:none" >{{n.is_fake}}</td>
-		<th scope="row">
-		    <input type="checkbox" id="qty" name="{{n.tweet_id}}" form="response-form"/>
-		</th>
-		<td class="menu_section">{{n.tweet_text}}</td>
+	    <tr class="tweet" id="tweet_{{n.tweet_id}}">
+			<td class="solution" style="display:none" >{{n.is_fake}}</td>
+			<th scope="row">
+				<input type="checkbox" class="answer" name="{{n.tweet_id}}" form="response-form"/>
+			</th>
+			<td class="menu_section">{{n.tweet_text}}</td>
 
 	    </tr>
 	    {% endfor %}
 	</tbody>
+
+	<form method="POST" id="response-form">
+		<div class="response-form">
+			<div class="form-group row">
+			<div class="col-sm">
+				<input type="submit" value="Submit" class="btn btn-primary">
+			</div>
+			</div>
+		</div>
+	</form>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+	<script>
+		$(document).ready(function() {
+			$('#response-form').on('submit', function(event) {
+				event.preventDefault();	
+				const tweets = $('.tweet').select()
+				window.t = tweets
+				const results = []
+				t.each((idx, tweet) => {
+					const tweetId = String($(tweet).attr('id')).split('_')[1]
+					const solution = Boolean($(tweet).find('.solution').html())
+					const answer = $($(tweet).find('input.answer')[0]).prop('checked')
+
+					if (solution == answer) {
+						$(tweet).css('background','green')						
+					} else {
+						$(tweet).css('background', 'red')
+					}
+					results.push({
+						tweetId, answer
+					})
+				})
+				fetch('/response', { method: 'POST', body: JSON.stringify(results)} )
+				.then((res) => res.json())
+				.then((result) => {
+					console.log(result)
+				})
+				
+			})
+		});
+	</script>
     </table>
 
 </body>

@@ -20,6 +20,7 @@ import json
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 
@@ -187,10 +188,15 @@ def add():
 
 @app.route('/response', methods=['POST'])
 def response_create():
-  tweet_id = request.form['tweet_id']
-  is_fake = request.form['is_fake'] # 0 or 1
-  cmd = 'INSERT INTO response(tweet_id, is_fake) VALUES (:tweet_id,:is_fake)'
-  g.conn.execute(text(cmd), tweet_id=tweet_id, is_fake=is_fake)
+  data = json.loads(request.data)
+  print(data)
+  cmd = 'INSERT INTO response(tweet_id, is_fake) VALUES '
+  for answer in data:
+    cmd += f"({answer['tweetId']}, {answer['answer']}),"
+  cmd = cmd[:-1]
+  print(cmd)
+  g.conn.execute(text(cmd))
+  return '{ "response": "ok" }'
 
 
 @app.route('/login')
