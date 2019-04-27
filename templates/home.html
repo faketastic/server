@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/static/style.css" type="text/css">
+<script src="/static/components.js"></script>
+{% block body %}
+<form action="/add_musician" method="POST">
+<div class="login">
+<div class="login-screen">
+       <div class="app-title">
+              <h1> FakeTastic </h1>
+              <h3> Hashtags </h3>
+       </div>
+       <div class="login-form">
+              <select class="ui massive dropdown teal button" multiple="" name="sp_id" id="search-select">
+                {% for hashtag in hashtags %}
+                  <option value={{ hashtag }}>{{ hashtag }}</option>
+                {% endfor %}
+              </select>
+              <label class="login-field-icon fui-lock" for="signin-city"></label>
+              <input type="button" value="View" class="btn btn-primary btn-large btn-block" onclick="window.location.href='{{ url_for( 'tweets') }}';">
+       </div>
+</div>
+</div>
+</form>
+{% endblock %}
