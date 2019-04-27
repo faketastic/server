@@ -31,8 +31,21 @@ Now you can access the application in your browser, navigate to localhost:8111.
 
 ![Run the server](https://github.com/faketastic/server/blob/master/assets/run_server.png "Run the server")
 
-For now, #charliehebdo is the only topic populated with tweets so go ahead and select it and click *View*.  
+For now, #charliehebdo is the only topic populated with tweets, so go ahead and select it and then click *View*.  
 
 ![Topic selection](https://github.com/faketastic/server/blob/master/assets/select_topic.png "Topic selection")
+
+Now you can see the text from ten tweets from the hashtag #charliehebdo.  
+
+![Tweet display](https://github.com/faketastic/server/blob/master/assets/tweet_display.png "Tweet display")
+
+Which do you think are fake? Go ahead and mark those that don't seem real.  
+
+![Response selection](https://github.com/faketastic/server/blob/master/assets/response_selection.png)
+
+When you've made your guesses, click submit to have your responses scores. Green means you got that one right, red means you might want to recalibrate your fake news detector.  
+
+![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png)
+
 ### Members
 Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirunm
