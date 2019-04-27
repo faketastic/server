@@ -43,7 +43,7 @@ Which do you think are fake? Go ahead and mark those that don't seem real.
 
 ![Response selection](https://github.com/faketastic/server/blob/master/assets/response_selection.png)
 
-When you've made your guesses, click submit to have your responses scores. Green means you got that one right, red means you might want to recalibrate your fake news detector.  
+When you've made your guesses, click submit to have your responses scored. Green means you were right, if you're seeing red you might want to recalibrate your fake news detector.  
 
 ![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png)
 
