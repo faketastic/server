@@ -16,6 +16,7 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
 import credentials
+import json
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -200,7 +201,12 @@ def login():
 
 @app.route('/tweets')
 def tweets():
-  return render_template('tweets.html')
+  cmd = "SELECT tweet_id, is_fake, tweet_text FROM Tweets LIMIT 10";
+  cursor = g.conn.execute(cmd)
+  data = [dict(tweet_id=result[0], is_fake=result[1], tweet_text=result[2]) for result in cursor]
+  data_string = json.dumps(data)
+  context = dict(data=data, data_string=data_string)
+  return render_template('tweets.html', **context)
 
 
 if __name__ == "__main__":

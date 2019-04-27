@@ -30,6 +30,7 @@
 	<tbody>
 	    {% for n in data %}
 	    <tr>
+		<td style="display:none" >{{n.is_fake}}</td>
 		<th scope="row">
 		    <input type="checkbox" id="qty" name="{{n.tweet_id}}" form="response-form"/>
 		</th>
