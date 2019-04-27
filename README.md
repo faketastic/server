@@ -48,4 +48,4 @@ When you've made your guesses, click submit to have your responses scored. Green
 ![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png)
 
 ### Members
-Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirunm
+Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirun
