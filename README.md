@@ -28,6 +28,9 @@ python server.py
 ```
 
 Now you can access the application in your browser, navigate to localhost:8111.  
+
+![Run the server](https://github.com/faketastic/server/blob/master/assets/run_server.png "Run the server")
+
 For now, #charliehebdo is the only topic populated with tweets so go ahead and select it and click *View*.  
 
 ![Topic selection](https://github.com/faketastic/server/blob/master/assets/select_topic.png "Topic selection")
