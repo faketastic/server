@@ -15,6 +15,7 @@ import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
+import numpy as np
 
 import credentials
 import json
@@ -217,7 +218,9 @@ def tweets():
   cmd  = cmd1+cmd2
   # print(cmd)
   alltweets = g.conn.execute(text(cmd),topic=str(topic))
-  data = [dict(tweet_id=result[0], is_fake=result[2], tweet_text=result[1]) for result in alltweets]
+  data = [dict(tweet_id=result[0], is_fake=result[2], 
+              tweet_text=result[1], conf=np.random.uniform(0,1)) for result in alltweets]
+  data = data[:10]
   data_string = json.dumps(data)
   context = dict(data=data, data_string=data_string)
   return render_template('tweets.html', **context)
