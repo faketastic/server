@@ -211,10 +211,10 @@ def login():
 @app.route('/tweets',methods=['GET','POST'])
 def tweets():
   topic = request.form['topic_id']
-  cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic LIMIT 10) "
-  # cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
-  # cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
-  # cmd  = cmd1+cmd2
+  # cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic LIMIT 10) "
+  cmd1 = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
+  cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
+  cmd  = cmd1+cmd2
   # print(cmd)
   alltweets = g.conn.execute(text(cmd),topic=str(topic))
   data = [dict(tweet_id=result[0], is_fake=result[2], tweet_text=result[1]) for result in alltweets]

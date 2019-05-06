@@ -22,7 +22,7 @@
 	<tbody>
 	    {% for n in data %}
 	    <tr class="tweet" id="tweet_{{n.tweet_id}}">
-			<td class="solution" style="display:none" >{{n.is_fake}}</td>
+			<td class="solution" style="" >{{n.is_fake}}</td>
 			<th scope="row">
 				<input type="checkbox" class="answer" name="{{n.tweet_id}}" form="response-form"/>
 			</th>
@@ -54,7 +54,7 @@
 				const results = []
 				t.each((idx, tweet) => {
 					const tweetId = String($(tweet).attr('id')).split('_')[1]
-					const solution = Boolean($(tweet).find('.solution').html())
+					const solution = $(tweet).find('.solution').html() == 'True'
 					const answer = $($(tweet).find('input.answer')[0]).prop('checked')
 
 					if (solution == answer) {
