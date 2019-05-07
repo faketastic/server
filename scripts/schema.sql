@@ -6,13 +6,19 @@
 DROP TABLE IF EXISTS Tweets;
 CREATE TABLE Tweets
 (
-  tweet_id          TEXT PRIMARY KEY,
-  tweet_hashtag     TEXT NOT NULL,
-  tweet_text        TEXT NOT NULL,
-  retweet           BOOLEAN NOT NULL,
-  retweet_source_id TEXT,
-  retweet_count     INTEGER,
-  is_fake           BOOLEAN
+  tweet_id              TEXT PRIMARY KEY,
+  tweet_hashtag         TEXT NOT NULL,
+  tweet_text            TEXT NOT NULL,
+  retweet               BOOLEAN NOT NULL,
+  retweet_source_id     TEXT,
+  retweet_count         INTEGER,
+  is_fake               BOOLEAN,
+  user_verified         BOOLEAN, 
+  user_followers_count  INTEGER, 
+  user_statuses_count   INTEGER, 
+  user_friends_count    INTEGER, 
+  user_favourites_count INTEGER, 
+  tweet_relative_age    INTEGER
 );
 
 -- Response table
@@ -35,15 +41,3 @@ CREATE TABLE Hashtags
   hashtag_id    SERIAL PRIMARY KEY,
   tweet_hashtag TEXT NOT NULL
 );
-
--- User table
--- DROP TABLE IF EXISTS Users;
--- CREATE TABLE Users
--- (
---   userid            INTEGER,
---   username          TEXT,
---   response_tweetid  TEXT,
---   game_response     INTEGER
--- )
--- PRIMARY KEY (userid)
--- FOREIGN KEY (response_tweetid) REFERENCES Tweets(tweetid);
