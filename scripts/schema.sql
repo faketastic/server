@@ -21,6 +21,25 @@ CREATE TABLE Tweets
   tweet_relative_age    INTEGER
 );
 
+-- DetailedTweets table
+DROP TABLE IF EXISTS Tweets_detailed;
+CREATE TABLE Tweets_detailed
+(
+  tweet_id              TEXT PRIMARY KEY,
+  tweet_hashtag         TEXT NOT NULL,
+  tweet_text            TEXT NOT NULL,
+  retweet               BOOLEAN NOT NULL,
+  retweet_source_id     TEXT,
+  retweet_count         INTEGER,
+  is_fake               BOOLEAN,
+  user_verified         BOOLEAN, 
+  user_followers_count  INTEGER, 
+  user_statuses_count   INTEGER, 
+  user_friends_count    INTEGER, 
+  user_favourites_count INTEGER, 
+  tweet_relative_age    INTEGER
+);
+
 -- Response table
 DROP TABLE IF EXISTS Response;
 CREATE TABLE Response
@@ -34,7 +53,7 @@ CREATE TABLE Response
   ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
--- Topics table
+-- -- Topics table
 DROP TABLE IF EXISTS Hashtags;
 CREATE TABLE Hashtags
 (
