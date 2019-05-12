@@ -16,6 +16,7 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
 import numpy as np
+import random
 from model import get_model
 
 import credentials
@@ -213,20 +214,25 @@ def login():
 @app.route('/tweets',methods=['GET','POST'])
 def tweets():
   topic = request.form['topic_id']
+  offset = np.random.randint(0, 1000)
   # cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic LIMIT 10) "
-  cmd1 = "(Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
-  cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
+  cmd1 = "(Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=False and length(tweet_text)>100 LIMIT 10 OFFSET :offset) "
+  cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=True and length(tweet_text)>100 LIMIT 10 OFFSET :offset)"
   cmd  = cmd1+cmd2
   # print(cmd)
-  alltweets = g.conn.execute(text(cmd),topic=str(topic))
+  alltweets = g.conn.execute(text(cmd),topic=str(topic),offset=offset)
 
 
   data = [dict(tweet_id=result[0], is_fake=result[2], 
               tweet_text=result[1]) for result in alltweets]
   conf = model.predict_proba([datum['tweet_text'] for datum in data])
   for i, datum in enumerate(data):
-    datum['conf'] = conf[i][1]
+    if conf[i][1] > .6:
+      datum['conf'] = conf[i][1]
+    else:
+      datum['conf'] = conf[i][0]
 
+  random.shuffle(data)
   data = data[:10]
   data_string = json.dumps(data)
   context = dict(data=data, data_string=data_string, topic=topic)

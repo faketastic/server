@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/tweets.css" type="text/css">
 
 {% block body %}
@@ -14,6 +15,8 @@
     <table class="table table-striped">
 	<thead class="thead-light">
 	    <tr>
+		<th scope="col" style="display:none"></th>
+		<th scope="col" class="result hidden">Grade</th>
 		<th scope="col">Fake?</th>
 		<th scope="col">Tweet</th>
 		<th scope="col" class="result hidden">Prediction Confidence</th>
@@ -22,14 +25,15 @@
 	<tbody>
 	    {% for n in data %}
 	    <tr class="tweet" id="tweet_{{n.tweet_id}}">
-			<td class="solution" style="display:none" >{{n.is_fake}}</td>
+		<td class="solution" style="display:none" >{{n.is_fake}}</td>
+		<td class="result hidden score"></td>
 			<th scope="row">
-				<input type="checkbox" class="answer" name="{{n.tweet_id}}" form="response-form"/>
+			    <input type="checkbox" class="answer" name="{{n.tweet_id}}" form="response-form"/>
 			</th>
 			<td class="menu_section">{{n.tweet_text}}</td>
 			<td class="result hidden">
 				<div class="progress">
-					<div class="progress-bar progress-bar-striped bg-{{'success' if n.conf > 0.5 else 'danger' }}" role="progressbar" 
+					<div class="progress-bar progress-bar-striped bg-{{'success' if n.is_fake == True else 'danger' }}" role="progressbar" 
 					style="width: {{n.conf * 100}}%" aria-valuenow="{{ n.conf}}" aria-valuemin="0" aria-valuemax="1"></div>
 				</div>
 			</td>
@@ -50,39 +54,42 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script>
-		$(document).ready(function() {
-			$('#response-form').on('submit', function(event) {
-				event.preventDefault();	
-				const tweets = $('.tweet').select()
-				window.t = tweets
-				const results = []
-				t.each((idx, tweet) => {
-					const tweetId = String($(tweet).attr('id')).split('_')[1]
-					const solution = $(tweet).find('.solution').html() == 'True'
-					const answer = $($(tweet).find('input.answer')[0]).prop('checked')
+	 $(document).ready(function() {
+	     $('#response-form').on('submit', function(event) {
+		 event.preventDefault();	
+		 const tweets = $('.tweet').select()
+		 window.t = tweets
+		 const results = []
+		 t.each((idx, tweet) => {
+		     const tweetId = String($(tweet).attr('id')).split('_')[1]
+		     const solution = $(tweet).find('.solution').html() == 'False'
+		     const answer = $($(tweet).find('input.answer')[0]).prop('checked')
 
-					//if (solution == answer) {
-					//	$(tweet).css('background','green')						
-					//} else {
-					//	$(tweet).css('background', 'red')
-					//}
-					results.push({
-						tweetId, answer
-					})
-				})
+		     if (solution == answer) {
+			 
+			 $(tweet).find('.score').html('<i class="fa fa-check" data-unicode="f00c"></i>')
+			 //$(tweet).css('background','green')						
+			 //} else {
+			 //	$(tweet).css('background', 'red')
+		     }
+		     results.push({
+			 tweetId, answer
+		     })
+		 })
 
-				$('.result.hidden').removeClass('hidden')
+		 $('.result.hidden').removeClass('hidden')
 
-				fetch('/response', { method: 'POST', body: JSON.stringify(results)} )
-				.then((res) => res.json())
-				.then((result) => {
-					console.log(result)
-				})
-				
-			})
-		});
+		 $('.score.hidden').removeClass('hidden')
+		 fetch('/response', { method: 'POST', body: JSON.stringify(results)} )
+		  .then((res) => res.json())
+		  .then((result) => {
+		      console.log(result)
+		  })
+		 
+	     })
+	 });
 	</script>
     </table>
 
