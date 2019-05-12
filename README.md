@@ -7,7 +7,7 @@ Ankita Agrawal aa4229, Eric Boxer ecb2198, Akshat Mittal am5022, Andrea Navarret
 FakeTastic is a web browser game in which players guess whether or not they think tweets are *real* or *fake*. First, players select a tweet hashtag and then they are able to place their guesses for a set of 10 tweets. We mark responses as *correct* or *incorrect* and show the player immediately.
 
 ### Web address
-[http://3.82.127.96:8111/](http://3.82.127.96:8111/)
+[FakeTastic](http://3.82.127.96:8111/)
 
 ### Instructions for running locally
 Clone the server directory.  
