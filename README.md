@@ -1,4 +1,7 @@
 ## Faketastic
+### Members
+Ankita Agrawal aa4229, Eric Boxer ecb2198, Akshat Mittal am5022, Andrea Navarrete Rivera an2886, Harin Sanghirun hs3058
+
 ### Data Analytics Pipelines Spring 2019
 FakeTastic is a web browser game in which players guess whether or not they think tweets are *real* or *fake*. First, players select a tweet hashtag and then they are able to place their guesses for a set of 10 tweets. We mark responses as *correct* or *incorrect* and show the player immediately.
 
@@ -48,9 +51,6 @@ The *Grade* column displays a check for each correct response. The *Prediction C
 Responses are stored in our database, for user analytics and for retraining a yet to be implemented fake tweet detection machine learning model.  
 
 ![Response database](https://github.com/faketastic/server/blob/master/assets/response_database.png "Response database") 
-
-### Members
-Ankita Agrawal, Eric Boxer, Akshat Mittal, Andrea Navarrete Rivera, Harin Sanghirun
 
 ### Resources
 [Jira](https://toydemoproject.atlassian.net/jira/software/projects/FAK/boards/10)
