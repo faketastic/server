@@ -222,7 +222,7 @@ def tweets():
               tweet_text=result[1], conf=np.random.uniform(0,1)) for result in alltweets]
   data = data[:10]
   data_string = json.dumps(data)
-  context = dict(data=data, data_string=data_string)
+  context = dict(data=data, data_string=data_string, topic=topic)
   return render_template('tweets.html', **context)
 
 
