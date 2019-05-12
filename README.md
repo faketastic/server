@@ -41,6 +41,7 @@ Now you can see the text from ten tweets from the hashtag #charliehebdo.
 
 Which do you think are fake? Go ahead and mark those that don't seem real.  
 When you've made your guesses, click submit to have your responses scored.  
+The *Grade* column displays a check for each correct response. The *Prediction Confidence* column displays the predicted probabilities from our model - the fuller the bar, the more confident we are of our prediction. A red bar corresponds to a fake tweet and a green corresponds to a not fake tweet.
 
 ![Response scoring](https://github.com/faketastic/server/blob/master/assets/after.png "Response scoring") 
 
