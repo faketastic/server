@@ -11,7 +11,6 @@
     <h1>{{location_name}}</h1>
     <h2>{{menu_name}}</h2>
 
-
     <table class="table table-striped">
 	<thead class="thead-light">
 	    <tr>
@@ -44,6 +43,7 @@
 			<div class="col-sm">
 				<input type="submit" value="Submit" class="btn btn-primary">
 			</div>
+    				<h2>#{{topic}}</h2>
 			</div>
 		</div>
 	</form>
@@ -63,11 +63,11 @@
 					const solution = $(tweet).find('.solution').html() == 'True'
 					const answer = $($(tweet).find('input.answer')[0]).prop('checked')
 
-					if (solution == answer) {
-						$(tweet).css('background','green')						
-					} else {
-						$(tweet).css('background', 'red')
-					}
+					//if (solution == answer) {
+					//	$(tweet).css('background','green')						
+					//} else {
+					//	$(tweet).css('background', 'red')
+					//}
 					results.push({
 						tweetId, answer
 					})

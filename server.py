@@ -214,8 +214,8 @@ def login():
 def tweets():
   topic = request.form['topic_id']
   # cmd = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic LIMIT 10) "
-  cmd1 = "(Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
-  cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from Tweets where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
+  cmd1 = "(Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=False LIMIT 10) "
+  cmd2 = "UNION (Select tweet_id,tweet_text,is_fake from tweets_detailed where tweet_hashtag = :topic and is_fake=True LIMIT 10 )"
   cmd  = cmd1+cmd2
   # print(cmd)
   alltweets = g.conn.execute(text(cmd),topic=str(topic))
@@ -229,7 +229,7 @@ def tweets():
 
   data = data[:10]
   data_string = json.dumps(data)
-  context = dict(data=data, data_string=data_string)
+  context = dict(data=data, data_string=data_string, topic=topic)
   return render_template('tweets.html', **context)
 
 
