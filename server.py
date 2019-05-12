@@ -16,6 +16,7 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
 import numpy as np
+from model import get_model
 
 import credentials
 import json
@@ -66,7 +67,7 @@ engine.execute("""CREATE TABLE IF NOT EXISTS test (
 );""")
 engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
-
+model = get_model()
 
 @app.before_request
 def before_request():
@@ -218,8 +219,14 @@ def tweets():
   cmd  = cmd1+cmd2
   # print(cmd)
   alltweets = g.conn.execute(text(cmd),topic=str(topic))
+
+
   data = [dict(tweet_id=result[0], is_fake=result[2], 
-              tweet_text=result[1], conf=np.random.uniform(0,1)) for result in alltweets]
+              tweet_text=result[1]) for result in alltweets]
+  conf = model.predict_proba([datum['tweet_text'] for datum in data])
+  for i, datum in enumerate(data):
+    datum['conf'] = conf[i][1]
+
   data = data[:10]
   data_string = json.dumps(data)
   context = dict(data=data, data_string=data_string)
