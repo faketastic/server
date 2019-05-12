@@ -35,7 +35,7 @@ For now, #charliehebdo is the only topic populated with tweets, so go ahead and 
 
 ![Topic selection](https://github.com/faketastic/server/blob/master/assets/select_topic.png "Topic selection")
 
-Now you can see the text from ten tweets from the hashtag #charliehebdo.  
+Now you can see the text from ten tweets from the hashtag #ferguson.  
 
 ![Tweet display](https://github.com/faketastic/server/blob/master/assets/before.png "Tweet display")
 
