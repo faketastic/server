@@ -37,15 +37,12 @@ For now, #charliehebdo is the only topic populated with tweets, so go ahead and 
 
 Now you can see the text from ten tweets from the hashtag #charliehebdo.  
 
-![Tweet display](https://github.com/faketastic/server/blob/master/assets/tweet_display.png "Tweet display")
+![Tweet display](https://github.com/faketastic/server/blob/master/assets/before.png "Tweet display")
 
 Which do you think are fake? Go ahead and mark those that don't seem real.  
+When you've made your guesses, click submit to have your responses scored.  
 
-![Response selection](https://github.com/faketastic/server/blob/master/assets/response_selection.png "Response selection")
-
-When you've made your guesses, click submit to have your responses scored. Green means you were right, if you're seeing red you might want to recalibrate your fake news detector.  
-
-![Response scoring](https://github.com/faketastic/server/blob/master/assets/response_scoring.png "Response scoring") 
+![Response scoring](https://github.com/faketastic/server/blob/master/assets/after.png "Response scoring") 
 
 Responses are stored in our database, for user analytics and for retraining a yet to be implemented fake tweet detection machine learning model.  
 
